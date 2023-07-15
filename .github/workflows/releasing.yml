@@ -33,17 +33,17 @@ jobs:
           draft: false
           prerelease: false
       - name: Create issue
-          uses: dacbd/create-issue-action@main
-          with:
-            token: ${{ github.token }}
-            title: ${{ env.title }}
-            body: |
-              ### Основная информация
-              [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
-              [Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }})
-              Workflow name - `${{ github.workflow }}`
-              Job -           `${{ github.job }}`
-              status -        `${{ job.status }}`
-              - ${{ env.author }}
-              - ${{ env.date }}
-              ${{ steps.changelog.outputs.changelog }}
+        uses: dacbd/create-issue-action@main
+        with:
+          token: ${{ github.token }}
+          title: ${{ env.title }}
+          body: |
+            ### Основная информация
+            [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            [Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }})
+            Workflow name - `${{ github.workflow }}`
+            Job -           `${{ github.job }}`
+            status -        `${{ job.status }}`
+            - ${{ env.author }}
+            - ${{ env.date }}
+            ${{ steps.changelog.outputs.changelog }}
