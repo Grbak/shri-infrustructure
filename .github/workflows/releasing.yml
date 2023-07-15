@@ -39,9 +39,10 @@ jobs:
         with:
           token: ${{ github.token }}
           title: ${{ env.title }}
+          labels: RELEASE
           body: |
             ### Основная информация
-            ![Release workflow](https://github.com/grbak/${{ github.repository }}/actions/workflows/releasing.yml/badge.svg)
+            ![Release workflow](https://github.com/${{ github.repository }}/actions/workflows/releasing.yml/badge.svg)
 
             - ${{ env.author }}
             - ${{ env.date }}
