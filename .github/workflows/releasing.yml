@@ -48,4 +48,4 @@ jobs:
             - ${{ env.date }}
             - ${{ steps.changelog.outputs.changelog }}
       - name: Test release
-        uses: Grbak/${{ github.repository }}/.github/workflows/testing.yml@{{ github.ref_name }}
+        uses: ./.github/workflows/testing.yml
