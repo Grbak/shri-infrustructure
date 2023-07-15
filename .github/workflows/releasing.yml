@@ -7,14 +7,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Get repository code
+        uses: actions/checkout@v3
       - name: Set environment variables
         run: |
           AUTHOR=$(git show ${{ github.ref }} | grep Tagger)
           DATE=$(git show ${{ github.ref }} | grep Date)
           echo "author=${AUTHOR}" >> $GITHUB_ENV
           echo "date=${DATE}" >> $GITHUB_ENV
-      - name: Get repository code
-        uses: actions/checkout@v3
       - name: Generate changelog
         id: changelog
         uses: metcalfc/changelog-generator@v4.1.0
