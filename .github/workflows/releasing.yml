@@ -15,6 +15,7 @@ jobs:
           DATE=$(git show ${{ github.ref }} | grep Date)
           echo "author=${AUTHOR}" >> $GITHUB_ENV
           echo "date=${DATE}" >> $GITHUB_ENV
+          echo "title=${{ github.ref }}" >> $GITHUB_ENV
       - name: Generate changelog
         id: changelog
         uses: metcalfc/changelog-generator@v4.1.0
@@ -27,23 +28,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          release_name: ${{ env.title }}
           body: |
             ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
       - name: Create issue
+        if: always()
         uses: dacbd/create-issue-action@main
         with:
           token: ${{ github.token }}
-          title: Release ${{ github.ref }}
+          title: ${{ env.title }}
           body: |
             ### Основная информация
-            [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            [Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }})
-            Workflow name - `${{ github.workflow }}`
-            Job -           `${{ github.job }}`
-            status -        `${{ job.status }}`
+            ![Release workflow](https://github.com/grbak/${{ github.repository }}/actions/workflows/releasing.yml/badge.svg)
+
             - ${{ env.author }}
             - ${{ env.date }}
-            ${{ steps.changelog.outputs.changelog }}
+            - ${{ steps.changelog.outputs.changelog }}
