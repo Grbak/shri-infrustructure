@@ -36,7 +36,7 @@ jobs:
         uses: dacbd/create-issue-action@main
         with:
           token: ${{ github.token }}
-          title: ${{ env.title }}
+          title: Release ${{ github.ref }}
           body: |
             ### Основная информация
             [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
