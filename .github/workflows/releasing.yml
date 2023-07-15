@@ -14,7 +14,7 @@ jobs:
         uses: metcalfc/changelog-generator@v4.1.0
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create Release
+      - name: Create release
         id: create_release
         uses: actions/create-release@latest
         env:
@@ -26,3 +26,11 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
+      - name: Create issue
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TITLE: Release ${{ github.ref }}
+          AUTHOR: `git show ${{ github.ref }} | grep Tagger`
+          DATE: `git show ${{ github.ref }} | grep Date`
+          CHANGELOG: ${{ steps.changelog.outputs.changelog }}
