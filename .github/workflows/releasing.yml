@@ -42,8 +42,7 @@ jobs:
           labels: RELEASE
           body: |
             ### Основная информация
-            ![Release workflow](https://github.com/${{ github.repository }}/actions/workflows/releasing.yml/badge.svg?event=push)
-
             - ${{ env.author }}
             - ${{ env.date }}
-            - ${{ steps.changelog.outputs.changelog }}
+            ### Changelog
+            ${{ steps.changelog.outputs.changelog }}
