@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Set environment variables
         run: |
-          AUTHOR=$(git show ${{ github.ref_name }})
+          AUTHOR=$(git show ${{ github.ref_name }} | grep Author)
           DATE=$(git show ${{ github.ref_name }} | grep Date)
           echo "author=${AUTHOR}" >> $GITHUB_ENV
           echo "date=${DATE}" >> $GITHUB_ENV
