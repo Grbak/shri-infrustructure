@@ -47,5 +47,3 @@ jobs:
             - ${{ env.author }}
             - ${{ env.date }}
             - ${{ steps.changelog.outputs.changelog }}
-      - name: Test release
-        uses: ./.github/workflows/testing.yml
